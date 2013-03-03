@@ -1,0 +1,23 @@
+# Folders #
+###################
+.svn
+.sass-cache
+
+config.rb
+demo.html
+compile
+humans.txt
+favicon.ico
+favicon.png
+
+fonts
+js
+
+sass/*
+!sass/drupal.scss
+
+css/*
+!css/drupal.css
+
+images/*
+!images/drupal/*

@@ -7,7 +7,6 @@ function seelva_form_system_theme_settings_alter(&$form, $form_state) {
   );
 
   /**
-  *
   * Add logo and favicon settings to vertical tabs
   *
   **/
@@ -16,11 +15,9 @@ function seelva_form_system_theme_settings_alter(&$form, $form_state) {
   $form['favicon']['#group'] = 'seelva_settings';
 
   /**
-  *
-  * Gneral settings
+  * General settings
   *
   **/
-
   $form['general_settings'] = array(
     '#title' => t('General settings'),
     '#type' => 'fieldset',
@@ -44,11 +41,10 @@ function seelva_form_system_theme_settings_alter(&$form, $form_state) {
   );
 
   /**
-  *
   * Stylesheet exclusion settings
   *
   **/
-  $form['seelva_styles'] = array(
+  $form['stylesheets'] = array(
     '#title' => t('Exclude stylesheets'),
     '#type' => 'fieldset',
     '#group' => 'seelva_settings',
@@ -56,20 +52,62 @@ function seelva_form_system_theme_settings_alter(&$form, $form_state) {
     '#collapsed' => FALSE,
   );
 
-  $form['seelva_styles']['seelva_exclusion_info'] = array(
-    '#markup' => variable_get('seelva_exclusion_info', t('<p>Disable module stylesheets</p>')),
+  $form['stylesheets']['seelva_exclusion_info'] = array(
+    '#title' => t('seelva core stylesheets'),
+    '#type' => 'fieldset',
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
   );
 
-  $exclude = theme_get_setting('seelva_exclude_css');
+  $seelva_stylesheets = drupal_parse_info_file( drupal_get_path('theme', 'seelva') . '/seelva.info' );
+  $seelva_stylesheets = $seelva_stylesheets['stylesheets'];
   $counter = 1;
-  foreach ($exclude as $name) {
-    $form['seelva_styles'][ 'seelva_exclude_css_' . (string)$counter ] = array(
-      '#type'          => 'checkbox',
-      '#title'         => $name,
-      '#default_value' => theme_get_setting( 'seelva_exclude_css_' . (string)$counter ),
-    );
 
-    $counter++;
+  foreach ($seelva_stylesheets as $item) {
+    // Styleshets are represented as per-media arrays: print, screen...
+    foreach ($item as $value) {
+      if ($value == '--') {
+        $form['stylesheets']['seelva_exclusion_info']['divider_' . (string)$counter ] = array(
+          '#markup' => '<hr />',
+        );
+      }
+      else {
+        $form['stylesheets']['seelva_exclusion_info'][ 'seelva_exclude_css_' . (string)$counter ] = array(
+          '#type'          => 'checkbox',
+          '#title'         => $value,
+          '#default_value' => theme_get_setting( 'seelva_exclude_css_' . (string)$counter ),
+        );
+
+        $counter++;
+      }
+    }
+  }
+
+  $form['stylesheets']['drupal_exclusion_info'] = array(
+    '#title' => t('Drupal core stylesheets'),
+    '#type' => 'fieldset',
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+
+  $core_stylesheets = theme_get_setting('seelva_exclude_css');
+  $counter = 1;
+
+  foreach ($core_stylesheets as $name) {
+    if ($name == '--') {
+      $form['stylesheets']['drupal_exclusion_info']['divider_' . (string)$counter ] = array(
+        '#markup' => '<hr />',
+      );
+    }
+    else {
+      $form['stylesheets']['drupal_exclusion_info'][ 'drupal_exclude_css_' . (string)$counter ] = array(
+        '#type'          => 'checkbox',
+        '#title'         => $name,
+        '#default_value' => theme_get_setting( 'drupal_exclude_css_' . (string)$counter ),
+      );
+
+      $counter++;
+    }
   }
 
    /**

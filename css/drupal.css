@@ -127,6 +127,14 @@ html.js fieldset.collapsed .fieldset-wrapper {
   clear: none;
 }
 
+div.indentation {
+  float: left;
+  height: 1.7em;
+  margin: -0.4em 0.2em -0.4em -0.4em;
+  padding: 0.42em 0 0.42em 0.6em;
+  width: 20px;
+}
+
 tr.drag {
   background-color: ivory;
 }
@@ -136,14 +144,6 @@ tr.drag-previous {
 }
 
 /*==========  ???  ==========*/
-div.indentation {
-  float: left;
-  height: 1.7em;
-  margin: -0.4em 0.2em -0.4em -0.4em;
-  padding: 0.42em 0 0.42em 0.6em;
-  width: 20px;
-}
-
 div.tree-child {
   background: url(../images/drupal/tree.png) no-repeat 11px center;
 }
@@ -390,40 +390,6 @@ div.vertical-tabs .vertical-tabs-list #active-vertical-tab {
   background-color: lavenderblush;
 }
 
-/*========== @file modules/field/theme/field.css ==========*/
-/* Field display */
-.field .field-label {
-  font-weight: bold;
-}
-
-.field-label-inline .field-label,
-.field-label-inline .field-items {
-  float: left;
-  /*LTR*/
-}
-
-/* Form display */
-.field-multiple-table {
-  margin: 0;
-}
-.field-multiple-table th.field-label {
-  padding-left: 0;
-  /*LTR*/
-}
-.field-multiple-table td.field-multiple-drag {
-  width: 30px;
-  padding-right: 0;
-  /*LTR*/
-}
-.field-multiple-table td.field-multiple-drag a.tabledrag-handle {
-  padding-right: .5em;
-  /*LTR*/
-}
-
-.field-add-more-submit {
-  margin: 0.5em 0 0;
-}
-
 /*========== @file modules/field_ui/field_ui.css ==========*/
 /* 'Manage fields' and 'Manage display' overviews */
 table.field-ui-overview .add-new td {
@@ -528,37 +494,21 @@ table.field-ui-overview .region-populated, table.field-ui-overview .region-add-n
   margin-bottom: 1em;
 }
 .search-form input {
-  margin-top: 0;
-  margin-bottom: 0;
+  width: auto;
 }
 
 .search-results {
   list-style: none;
   margin: 0;
 }
-.search-results p {
-  margin-top: 0;
-}
-.search-results li {
-  margin-bottom: 1em;
-}
 .search-results .search-result {
-  margin: 0;
-}
-.search-results .search-info {
-  font-size: 0.85em;
+  margin-bottom: 1em;
 }
 .search-results .search-snippet-info {
   padding-left: 1em;
 }
-
-.search-advanced .criterion {
-  float: left;
-  margin-right: 2em;
-}
-.search-advanced .action {
-  float: left;
-  clear: left;
+.search-results .search-info {
+  font-size: 0.85em;
 }
 
 /*========== @file modules/user/user.css ==========*/
@@ -647,28 +597,6 @@ div.password-confirm {
 .form-managed-file .form-file {
   width: auto;
 }
-.form-managed-file .form-file, .form-managed-file .form-submit {
-  margin: 0;
-}
-.form-managed-file .progress-disabled {
-  float: none;
-  display: inline;
-}
-.form-managed-file .ajax-progress,
-.form-managed-file .throbber {
-  display: inline;
-  float: none;
-  padding: 1px 5px 2px 5px;
-}
-.form-managed-file .ajax-progress-bar {
-  display: none;
-  margin-top: 4px;
-  width: 28em;
-  padding: 0;
-}
-.form-managed-file .ajax-progress-bar .bar {
-  margin: 0;
-}
 
 /*========== @file modules/filter/filter.css ==========*/
 .text-format-wrapper .form-item {
@@ -690,17 +618,29 @@ div.password-confirm {
 .filter-wrapper div {
   clear: none;
 }
+.filter-wrapper .form-item {
+  margin-bottom: 10px;
+}
+.filter-wrapper .form-item label {
+  display: inline-block;
+}
 .filter-wrapper .form-item select {
-  clear: none;
   width: auto;
 }
 
+.filter-help {
+  float: right;
+}
 .filter-help p {
   margin: 0;
 }
-.filter-help a {
+.filter-help a, .filter-help a:link {
   background: url(../images/drupal/help.png) right center no-repeat;
   padding: 0 20px 0 0;
+}
+
+.filter-guidelines {
+  clear: both;
 }
 
 #filter-order tr .form-item {
@@ -744,4 +684,54 @@ td.active {
   background: whitesmoke;
 }
 
+/*==========  file @ modules/image/image.css  ==========*/
+.form-item .image-widget {
+  overflow: hidden;
+  margin-bottom: 0;
+}
+.form-item .image-widget .image-preview,
+.form-item .image-widget .image-widget-data {
+  clear: none;
+  float: left;
+  margin-bottom: 0;
+}
+.form-item .image-widget .image-preview {
+  margin-right: 1em;
+}
+
+/*==========  file @ modules/openid/openid.css  ==========*/
+#edit-openid-identifier {
+  background: url(../images/drupal/icon-openid.png) no-repeat 4px center;
+  padding-left: 24px;
+}
+
+.form-item-openid-identifier {
+  display: block;
+}
+.js .form-item-openid-identifier {
+  display: none;
+}
+
+#user-login-form .openid-links,
+#user-login .openid-links {
+  margin: 0;
+}
+#user-login-form .openid-links .openid-link,
+#user-login .openid-links .openid-link {
+  display: none;
+}
+.js #user-login-form .openid-links .openid-link, .js
+#user-login .openid-links .openid-link {
+  display: block;
+}
+#user-login-form .openid-links a, #user-login-form .openid-links a:link,
+#user-login .openid-links a,
+#user-login .openid-links a:link {
+  background: url(../images/drupal/icon-openid.png) no-repeat left center;
+  padding-left: 20px;
+}
+
 /*-----  End of $Drupal  ------*/
+.fieldset-wrapper {
+  overflow: hidden;
+}

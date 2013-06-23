@@ -92,39 +92,37 @@ settings[humans] = 1
 ; =            $STYLESHEET FOR EXCLUSION            =
 ; =================================================*/
 
+settings[seelva_exclude_css][] = modules/comment/comment.css
 settings[seelva_exclude_css][] = modules/file/file.css
 settings[seelva_exclude_css][] = modules/filter/filter.css
+settings[seelva_exclude_css][] = modules/image/image.css
+settings[seelva_exclude_css][] = modules/node/node.css
+settings[seelva_exclude_css][] = modules/openid/openid.css
+settings[seelva_exclude_css][] = modules/poll/poll.css
+settings[seelva_exclude_css][] = modules/search/search.css
+settings[seelva_exclude_css][] = modules/system/system.admin.css
 settings[seelva_exclude_css][] = modules/system/system.base.css
 settings[seelva_exclude_css][] = modules/system/system.menus.css
 settings[seelva_exclude_css][] = modules/system/system.messages.css
 settings[seelva_exclude_css][] = modules/system/system.theme.css
-settings[seelva_exclude_css][] = modules/node/node.css
 settings[seelva_exclude_css][] = modules/user/user.css
+settings[seelva_exclude_css][] = --
 settings[seelva_exclude_css][] = modules/field/theme/field.css
-settings[seelva_exclude_css][] = modules/field_ui/field_ui.css
-settings[seelva_exclude_css][] = modules/search/search.css
-settings[seelva_exclude_css][] = modules/comment/comment.css
-
-settings[seelva_exclude_css][] = misc/vertical-tabs.css
+settings[seelva_exclude_css][] = --
 settings[seelva_exclude_css][] = modules/aggregator/aggregator.css
 settings[seelva_exclude_css][] = modules/block/block.css
 settings[seelva_exclude_css][] = modules/dblog/dblog.css
+settings[seelva_exclude_css][] = modules/field_ui/field_ui.css
 settings[seelva_exclude_css][] = modules/help/help.css
 settings[seelva_exclude_css][] = modules/menu/menu.css
-settings[seelva_exclude_css][] = modules/openid/openid.css
 settings[seelva_exclude_css][] = modules/profile/profile.css
-settings[seelva_exclude_css][] = modules/statistics/statistics.css
-settings[seelva_exclude_css][] = modules/syslog/syslog.css
-
-settings[seelva_exclude_css][] = modules/system/admin.css
-settings[seelva_exclude_css][] = modules/system/maintenance.css
-settings[seelva_exclude_css][] = modules/system/system.css
-settings[seelva_exclude_css][] = modules/system/system.admin.css
 settings[seelva_exclude_css][] = modules/system/system.maintenance.css
-
 settings[seelva_exclude_css][] = modules/taxonomy/taxonomy.css
 settings[seelva_exclude_css][] = modules/tracker/tracker.css
-settings[seelva_exclude_css][] = modules/update/update.css
+settings[seelva_exclude_css][] = --
+settings[seelva_exclude_css][] = misc/vertical-tabs.css
+settings[seelva_exclude_css][] = modules/overlay/overlay-child.css
+settings[seelva_exclude_css][] = modules/overlay/overlay-parent.css
 
 ; /*============================================
 ; =            $BREADCRUMB SETTINGS            =

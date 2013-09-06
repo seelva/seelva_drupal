@@ -1,5 +1,6 @@
 <?php
 function seelva_form_system_theme_settings_alter(&$form, $form_state) {
+  dpm($form);
 
   $form['seelva_settings'] = array(
     '#type' => 'vertical_tabs',
@@ -33,10 +34,17 @@ function seelva_form_system_theme_settings_alter(&$form, $form_state) {
     '#description'   => t('If checked, seelva will use an HTML5 doctype declaration. If you decide to use an HTML5 doctype it is recommended to also use a helper module like !html5_tools', array('!html5_tools' => l('HTML5 Tools', 'http://drupal.org/project/html5_tools') )),
   );
 
+  $form['general_settings']['html5shim'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Use html5shim'),
+    '#default_value' => theme_get_setting('html5shim'),
+    '#description'   => t('If checked, seelva will use HTML5shim library to define new HTML5 tags in in legacy browsers. If you decide to use an HTML5 doctype it is recommended to also use a helper module like !html5_tools', array('!html5_tools' => l('HTML5 Tools', 'http://drupal.org/project/html5_tools') )),
+  );
+
   $form['general_settings']['humans'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Use humans.txt'),
-    '#default_value' => theme_get_setting('html5'),
+    '#default_value' => theme_get_setting('humans'),
     '#description'   => t('Give credit to the developer using humans.txt file. humans.txt content must be edited outside drupal'),
   );
 

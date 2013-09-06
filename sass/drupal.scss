@@ -20,7 +20,7 @@
 }
 
 .contextual-links-region:hover {
-	background: $LemonChiffon;
+	outline: 1px dashed $brand-main;
 }
 /*==========  $Temp  ==========*/
 
@@ -466,6 +466,7 @@ table.field-ui-overview {
 .password-strength-text {
 	float: right;
 	font-weight: bold;
+	margin: 0;
 }
 .password-indicator {
 	background-color: $GhostWhite;
@@ -575,7 +576,8 @@ span {
 	&.error,
 	&.info,
 	&.success,
-	&.warning {
+	&.warning,
+	&.ok {
 		border: 0;
 		padding: 0;
 		background: transparent;
@@ -646,6 +648,10 @@ td.active { background: $WhiteSmoke; }
 			display: none;
 
 			.js & { display: block; }
+		}
+		
+		.user-link {
+			display: none;
 		}
 
 		a, a:link {

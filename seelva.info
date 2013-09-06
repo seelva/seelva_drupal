@@ -86,6 +86,7 @@ regions[footer_after]  = Footer After
 ; =========================================*/
 
 settings[html5]  = 0
+settings[html5shim] = 1
 settings[humans] = 1
 
 ; /*=================================================
@@ -120,9 +121,9 @@ settings[seelva_exclude_css][] = modules/system/system.maintenance.css
 settings[seelva_exclude_css][] = modules/taxonomy/taxonomy.css
 settings[seelva_exclude_css][] = modules/tracker/tracker.css
 settings[seelva_exclude_css][] = --
-settings[seelva_exclude_css][] = misc/vertical-tabs.css
 settings[seelva_exclude_css][] = modules/overlay/overlay-child.css
 settings[seelva_exclude_css][] = modules/overlay/overlay-parent.css
+settings[seelva_exclude_css][] = misc/vertical-tabs.css
 
 ; /*============================================
 ; =            $BREADCRUMB SETTINGS            =

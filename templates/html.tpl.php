@@ -12,8 +12,7 @@
  *   $language->dir contains the language direction. It will either be 'ltr' or 'rtl'.
  * - $rdf_namespaces: All the RDF namespace prefixes used in the HTML document.
  * - $grddl_profile: A GRDDL profile allowing agents to extract the RDF data.
- * - $head_title: A modified version of the page title, for use in the TITLE
- *   tag.
+ * - $head_title: A modified version of the page title, for use in the TITLE tag.
  * - $head_title_array: (array) An associative array containing the string parts
  *   that were used to generate the $head_title variable, already prepared to be
  *   output as TITLE tag. The key/value pairs may contain one or more of the
@@ -40,34 +39,17 @@
  * @see template_preprocess_html()
  * @see template_process()
  */
-?>
-<?php if ( !theme_get_setting('html5') ): ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<!--[if lt IE 7 ]> <html class="ie6" xmlns="http://www.w3.org/1999/xhtml" dir="<?php print $language->dir; ?>" lang="<?php print $language->language; ?>" xml:lang="<?php print $language->language; ?>" version="XHTML+RDFa 1.0"<?php print $rdf_namespaces; ?>> <![endif]-->
-<!--[if IE 7 ]>    <html class="ie7" xmlns="http://www.w3.org/1999/xhtml" dir="<?php print $language->dir; ?>" lang="<?php print $language->language; ?>" xml:lang="<?php print $language->language; ?>" version="XHTML+RDFa 1.0"<?php print $rdf_namespaces; ?>> <![endif]-->
-<!--[if IE 8 ]>    <html class="ie8" xmlns="http://www.w3.org/1999/xhtml" dir="<?php print $language->dir; ?>" lang="<?php print $language->language; ?>" xml:lang="<?php print $language->language; ?>" version="XHTML+RDFa 1.0"<?php print $rdf_namespaces; ?>> <![endif]-->
-<!--[if IE 9 ]>    <html class="ie9" xmlns="http://www.w3.org/1999/xhtml" dir="<?php print $language->dir; ?>" lang="<?php print $language->language; ?>" xml:lang="<?php print $language->language; ?>" version="XHTML+RDFa 1.0"<?php print $rdf_namespaces; ?>> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html xmlns="http://www.w3.org/1999/xhtml" dir="<?php print $language->dir; ?>" lang="<?php print $language->language; ?>" xml:lang="<?php print $language->language; ?>" version="XHTML+RDFa 1.0"<?php print $rdf_namespaces; ?>> <!--<![endif]-->
-<?php else: ?><!DOCTYPE html>
-<!--[if lt IE 7 ]> <html class="ie6" dir="<?php print $language->dir; ?>" lang="<?php print $language->language; ?>"<?php print $rdf_namespaces; ?>> <![endif]-->
-<!--[if IE 7 ]>    <html class="ie7" dir="<?php print $language->dir; ?>" lang="<?php print $language->language; ?>"<?php print $rdf_namespaces; ?>> <![endif]-->
-<!--[if IE 8 ]>    <html class="ie8" dir="<?php print $language->dir; ?>" lang="<?php print $language->language; ?>"<?php print $rdf_namespaces; ?>> <![endif]-->
-<!--[if IE 9 ]>    <html class="ie9" dir="<?php print $language->dir; ?>" lang="<?php print $language->language; ?>"<?php print $rdf_namespaces; ?>> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html dir="<?php print $language->dir; ?>" lang="<?php print $language->language; ?>"<?php print $rdf_namespaces; ?>> <!--<![endif]-->
-<?php endif; ?>
+?><?php print $doctype; ?>
+<!--[if lt IE 7 ]> <html class="ie6"<?php print drupal_attributes($html_attributes_array); ?><?php print $rdf_namespaces; ?>> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"<?php print drupal_attributes($html_attributes_array); ?><?php print $rdf_namespaces; ?>> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"<?php print drupal_attributes($html_attributes_array); ?><?php print $rdf_namespaces; ?>> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"<?php print drupal_attributes($html_attributes_array); ?><?php print $rdf_namespaces; ?>> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html<?php print drupal_attributes($html_attributes_array); ?><?php print $rdf_namespaces; ?>> <!--<![endif]-->
+
 <head profile="<?php print $grddl_profile; ?>">
 	<?php print $head; ?>
 	<title><?php print $head_title; ?></title>
 	<?php print $styles; ?>
-
-	<?php if ( theme_get_setting( 'humans' ) ): ?>
-	<link rel="author" href="<?php print( drupal_get_path('theme', 'seelva') . '/humans.txt' ); ?>" />
-	<?php endif; ?>
-
-	<!-- Register the new HTML5 tags in older IE versions -->
-	<!--[if lt IE 9]>
-		<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<script>window.shim || document.write('<script src="<?php print( drupal_get_path('theme', 'seelva') . '/js/libs/html5.js' ); ?>"><\/script>')</script>
-	<![endif]-->
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
 	<div id="skip-links">

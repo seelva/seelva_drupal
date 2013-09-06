@@ -17,7 +17,7 @@
 }
 
 .contextual-links-region:hover {
-  background: lemonchiffon;
+  outline: 1px dashed #4e9a06;
 }
 
 /*==========  $Temp  ==========*/
@@ -543,6 +543,7 @@ table.field-ui-overview .region-populated, table.field-ui-overview .region-add-n
 .password-strength-text {
   float: right;
   font-weight: bold;
+  margin: 0;
 }
 
 .password-indicator {
@@ -660,7 +661,7 @@ div.password-confirm {
 }
 
 /* messages */
-span.error, span.info, span.success, span.warning {
+span.error, span.info, span.success, span.warning, span.ok {
   border: 0;
   padding: 0;
   background: transparent;
@@ -723,6 +724,10 @@ td.active {
 .js #user-login-form .openid-links .openid-link, .js
 #user-login .openid-links .openid-link {
   display: block;
+}
+#user-login-form .openid-links .user-link,
+#user-login .openid-links .user-link {
+  display: none;
 }
 #user-login-form .openid-links a, #user-login-form .openid-links a:link,
 #user-login .openid-links a,

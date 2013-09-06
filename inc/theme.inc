@@ -1,10 +1,25 @@
 <?php
 
-function seelva_textarea($variables) {
+/**
+* theme_menu_link()
+*/
+function seelva_menu_link(array $vars) {
+  /**
+  * Add classes to li
+  **/
+   $vars['element']['#attributes']['class'][] = 'menu-item';
+  return theme_menu_link($vars);
+}
+
+/**
+* theme_textarea()
+**/
+
+function seelva_textarea($vars) {
   /**
   * Removes re-sizable functionality on all text areas
   **/
-  $element = $variables['element'];
+  $element = $vars['element'];
 
   $element['#attributes']['id'] = $element['#id'];
   $element['#attributes']['name'] = $element['#name'];
@@ -22,25 +37,31 @@ function seelva_textarea($variables) {
   return $output;
 }
 
-/* Renders a progress bar using seelva markup style */
-function seelva_progress_bar($variables) {
+/**
+* theme_progress_bar()
+**/
+function seelva_progress_bar($vars) {
+  /* Renders a progress bar using seelva markup style */
 	$output = '<div class="progress">';
 		$output .= '<div class="progressbar progressbar-info">';
-			$output .= '<div class="progress-value" style="width: ' . $variables['percent'] . '%"><div class="progress-text">' . $variables['percent'] . '%</div></div>';
+			$output .= '<div class="progress-value" style="width: ' . $vars['percent'] . '%"><div class="progress-text">' . $vars['percent'] . '%</div></div>';
 		$output .= '</div>';
 
-		$output .= '<div class="message">' . $variables['message'] . '</div>';
+		$output .= '<div class="message">' . $vars['message'] . '</div>';
 	$output .= '</div>';
 
 	return $output;
 }
 
-/* Render a pager using seelva markup */
-function seelva_pager($variables) {
-	$tags = $variables['tags'];
-	$element = $variables['element'];
-	$parameters = $variables['parameters'];
-	$quantity = $variables['quantity'];
+/**
+* theme_pager()
+**/
+function seelva_pager($vars) {
+  /* Render a pager using seelva markup */
+	$tags = $vars['tags'];
+	$element = $vars['element'];
+	$parameters = $vars['parameters'];
+	$quantity = $vars['quantity'];
 	global $pager_page_array, $pager_total;
 
 	// Calculate various markers within this pager piece:
@@ -212,13 +233,13 @@ function seelva_breadcrumb($vars) {
 * Implements hook_THEME()
 *
 **/
-function seelva_item_list($variables) {
-  $items = $variables['items'];
-  $title = $variables['title'];
-  $type = $variables['type'];
-  $attributes = $variables['attributes'];
+function seelva_item_list($vars) {
+  $items = $vars['items'];
+  $title = $vars['title'];
+  $type = $vars['type'];
+  $attributes = $vars['attributes'];
 
-  $wrapper_attributes = isset( $variables['wrapper_attributes'] ) ? $variables['wrapper_attributes'] : array();
+  $wrapper_attributes = isset( $vars['wrapper_attributes'] ) ? $vars['wrapper_attributes'] : array();
 
   if ( !isset($wrapper_attributes['class']) ) {
     $wrapper_attributes['class'] = array('item-list');
@@ -272,5 +293,36 @@ function seelva_item_list($variables) {
     $output .= "</$type>";
   }
   $output .= '</div>';
+  return $output;
+}
+
+function seelva_status_messages($variables) {
+  $display = $variables['display'];
+  $output = '';
+
+  $status_heading = array(
+    'status' => t('Status message'),
+    'error' => t('Error message'),
+    'warning' => t('Warning message'),
+  );
+  foreach (drupal_get_messages($display) as $type => $messages) {
+    $output .= '<div class="messages ' . $type . '">';
+    $output .= '<a href="#close-msg" class="btn-close">&times;</a>';
+    if (!empty($status_heading[$type])) {
+      $output .= '<h2 class="element-invisible">' . $status_heading[$type] . "</h2>";
+    }
+    if (count($messages) > 1) {
+      $output .= '<ul>';
+      foreach ($messages as $message) {
+        $output .= '  <li>' . $message . '</li>';
+      }
+      $output .= '</ul>';
+    }
+    else {
+      $output .= $messages[0];
+    }
+    $output .= '</div>';
+  }
+
   return $output;
 }

@@ -12,7 +12,7 @@ function seelva_preprocess_html(&$vars) {
     );
   }
 
-  // Fixes page titles for login, register & password.
+  // Fixes page titles for login, register & password pages
   switch (current_path()) {
     case 'user':
       $vars['head_title_array']['title'] = t('Login');
@@ -37,6 +37,67 @@ function seelva_preprocess_html(&$vars) {
 
     default:
       break;
+  }
+
+  // If the current page is a node, add a class page-node-type-NODETYPE
+  $node = menu_get_object();
+  if ($node) {
+    $vars['classes_array'][] = 'page-node-type-' . $node->type;
+  }
+
+   // Ensure that the $vars['rdf'] variable is an object.
+  if (!isset($vars['rdf']) || !is_object($vars['rdf'])) {
+    $vars['rdf'] = new StdClass();
+  }
+
+  // HTML attributes
+  $vars['html_attributes_array'] = array();
+  $vars['html_attributes_array']['dir'][] = $vars['language']->dir;
+  $vars['html_attributes_array']['lang'][] = $vars['language']->language;
+  $vars['html_attributes_array']['xml:lang'][] = $vars['language']->language;
+
+  if ( !theme_get_setting('html5') ) {
+    $vars['doctype'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">' . "\n";
+    $vars['html_attributes_array']['xmlns'][] = 'http://www.w3.org/1999/xhtml';
+    $vars['html_attributes_array']['version'][] = 'XHTML+RDFa 1.0';
+  }
+  else {
+    $vars['doctype'] = '<!DOCTYPE html>' . "\n";
+  }
+
+  // Use html5shiv.
+  if (theme_get_setting('html5shim')) {
+    $script1 = array(  
+      'element' => array(
+        '#tag' => 'script',
+        '#value' => '',
+        '#attributes' => array(
+          'src' => '//html5shim.googlecode.com/svn/trunk/html5.js'
+        ),
+      )
+    );
+
+    $script2 = array(  
+      'element' => array(
+        '#tag' => 'script',
+        '#value' => 'window.shim || document.write(\'<script src="' . drupal_get_path('theme', 'seelva') . '/js/libs/html5.js' . '"><\/script>\')'
+      )
+    );
+
+    $html5shim = array(
+      '#type' => 'markup',
+      '#markup' => "<!-- Register the new HTML5 tags in older IE versions -->\n<!--[if lt IE 9]>\n\t" . theme('html_tag', $script1) . "\t" . theme('html_tag', $script2) . "<![endif]-->\n",
+    );
+    drupal_add_html_head($html5shim, 'seed_html5shim');
+  }
+
+  // Include humans.txt file
+  if ( theme_get_setting( 'humans' ) ) {
+    $link = array(
+      'rel' => 'author',
+      'href' => drupal_get_path('theme', 'seelva') . '/humans.txt'
+    );
+    drupal_add_html_head_link($link);
   }
 }
 
@@ -84,7 +145,6 @@ function seelva_preprocess_page(&$vars) {
   }
 }
 
-
 /**
 * Implements hook_preprocess_node()
 *
@@ -103,3 +163,21 @@ function seelva_preprocess_node(&$vars) {
   $vars['classes_array'][] = 'node-' . $vars['node']->type . '-' . $vars['view_mode'];
 }
 
+/**
+* Implements THEME_preprocess_block()
+*
+**/
+function seelva_preprocess_block(&$vars) {
+  // Add block-id as class
+  $vars['classes_array'][] = drupal_html_class($vars['block_html_id']);
+  // $vars['title_attributes_array']['class'][] = 'block-title';
+  $vars['content_attributes_array']['class'][] = 'block-content';
+}
+
+/**
+* Implements THEME_preprocess_views_view()
+**/
+function seelva_preprocess_views_view(&$vars) {
+  /* Add a class in the form of view-VIEWNAME--VIEWDISPLAY-ID to every class */
+  $vars['classes_array'][] = 'view-'. $vars['css_name'] . '--' . $vars['display_id'];
+} 

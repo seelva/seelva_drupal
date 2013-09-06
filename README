@@ -4,12 +4,12 @@ Seelva for Drupal is a base theme based on [seelva Framework](http://seelva.com/
 
 ## Features ##
 
-* 20 regions
+* 20+ regions
 * XHTML 1.0 Strict / HTML5 doctype chooser
 * Core CSS files exclusion
 * "Site Logo", "site name", "site slogan", "breadcrumbs" and "page title" as blocks through [SeeD Tools](http://drupal.org/project/seed_tools "SeeD Tools") module
 * Configurable breadcrumbs
-* Some other nice features
+* Enable / Disable core and custom stylesheets
 
 ## Installation ##
 

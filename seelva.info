@@ -8,16 +8,18 @@ core = 7.x
 ; =            $STYLESHEETS            =
 ; ====================================*/
 
+
+
+
 stylesheets[print][]  = css/print.css
+stylesheets[screen][] = css/normalize.css
 stylesheets[screen][] = css/base.css
 stylesheets[screen][] = css/core.css
-stylesheets[screen][] = css/forms.css
-stylesheets[screen][] = css/media.css
 stylesheets[screen][] = css/nav.css
-stylesheets[screen][] = css/dropdown.css
-stylesheets[screen][] = css/ui.css
-stylesheets[screen][] = css/utils.css
+stylesheets[screen][] = css/helpers.css
+stylesheets[screen][] = css/objects.css
 stylesheets[screen][] = css/icons.css
+
 stylesheets[screen][] = css/drupal.css
 
 stylesheets[screen][] = css/custom.css

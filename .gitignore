@@ -2,15 +2,8 @@
 ###################
 .svn
 .sass-cache
-config.rb
-demo.html
-compile
-humans.txt
-favicon.ico
-favicon.png
 <<<<<<< HEAD
 fonts
-js
 sass/*
 !sass/drupal.scss
 css/*

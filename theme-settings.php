@@ -1,7 +1,5 @@
 <?php
 function seelva_form_system_theme_settings_alter(&$form, $form_state) {
-  dpm($form);
-
   $form['seelva_settings'] = array(
     '#type' => 'vertical_tabs',
     '#weight' => 99,
@@ -117,6 +115,12 @@ function seelva_form_system_theme_settings_alter(&$form, $form_state) {
       $counter++;
     }
   }
+
+  $form['stylesheets']['custom_exclusion_info'] = array(
+  	'#title' => t('Custom exclusions'),
+  	'#type' => 'textarea',
+  	'#default_value' => theme_get_setting( 'custom_exclusion_info' )
+  );
 
    /**
    * Breadcrumb settings

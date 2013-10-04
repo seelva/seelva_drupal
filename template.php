@@ -55,6 +55,20 @@ function seelva_css_alter(&$css) {
     }
   }
 
+  // Exclude custom stylesheets
+  $custom_stylsheets = explode(PHP_EOL, theme_get_setting('custom_exclusion_info'));
+
+  $counter = 1;
+  foreach ($custom_stylsheets as $name) {
+    if ($name != ' ') {
+      $saved_value = (bool)theme_get_setting( 'custom_exclusion_info' );
+
+      $exclude[$name] = $saved_value;
+
+      $counter++;
+    }
+  }
+
   $css = array_diff_key($css, $exclude);
 }
 

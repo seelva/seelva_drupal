@@ -18,6 +18,8 @@ stylesheets[screen][] = css/helpers.css
 stylesheets[screen][] = css/objects.css
 stylesheets[screen][] = css/icons.css
 
+stylesheets[screen][] = css/drupal.css
+
 stylesheets[screen][] = css/custom.css
 
 ; /*================================

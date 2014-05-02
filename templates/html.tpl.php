@@ -39,7 +39,7 @@
  * @see template_preprocess_html()
  * @see template_process()
  */
-?><?php print $doctype; ?>
+?><!DOCTYPE html>
 <!--[if lt IE 7 ]> <html class="ie6"<?php print drupal_attributes($html_attributes_array); ?><?php print $rdf_namespaces; ?>> <![endif]-->
 <!--[if IE 7 ]>    <html class="ie7"<?php print drupal_attributes($html_attributes_array); ?><?php print $rdf_namespaces; ?>> <![endif]-->
 <!--[if IE 8 ]>    <html class="ie8"<?php print drupal_attributes($html_attributes_array); ?><?php print $rdf_namespaces; ?>> <![endif]-->
@@ -52,16 +52,16 @@
 	<?php print $styles; ?>
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
+	<?php print $page_top; ?>
 	<div id="skip-links">
 		<a href="#main-content" class="element-invisible element-focusable"><?php print t('Skip to main content'); ?></a>
 	</div>
 	<div id="outer">
 		<div id="wrapper">
-			<?php print $page_top; ?>
 			<?php print $page; ?>
-			<?php print $page_bottom; ?>
 		</div>
 	</div>
 	<?php print $scripts; ?>
+	<?php print $page_bottom; ?>
 </body>
 </html>

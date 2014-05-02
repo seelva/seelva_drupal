@@ -81,21 +81,22 @@
 </div>
 <?php endif; ?>
 
-<div id="header" class="section">
+<?php if ( $page['header_before'] || $page['header'] || $page['header_after'] ): ?>
+<header id="header" class="section">
 	<div class="holder">
 		<?php if ( $page['header_before']): print render($page['header_before']); endif; ?>
 		<?php if ( $page['header']): print render($page['header']); endif; ?>
 		<?php if ( $page['header_after']): print render($page['header_after']); endif; ?>
 	</div>
-</div> <!-- /#header -->
+</header> <!-- /#header -->
+<?php endif; ?>
 
-<?php if ( $page['menu'] && ( $main_menu || $secondary_menu ) ): ?>
-<div id="navigation" class="section">
+<?php if ( $page['menu'] ): ?>
+<nav id="navigation" class="section">
 	<div class="holder">
-		<?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('id' => 'main-menu', 'class' => array('links', 'inline', 'clearfix')), 'heading' => t('Main menu'))); ?>
-		<?php print theme('links__system_secondary_menu', array('links' => $secondary_menu, 'attributes' => array('id' => 'secondary-menu', 'class' => array('links', 'inline', 'clearfix')), 'heading' => t('Secondary menu'))); ?>
+		<?php print render($page['menu']); ?>
 	</div>
-</div> <!-- /#navigation -->
+</nav> <!-- /#navigation -->
 <?php endif; ?>
 
 
@@ -112,22 +113,26 @@
 
 <div id="main-wrapper" class="section">
 	<div class="holder">
-		<div id="content" class="column">
+		<main id="content" class="column">
 			<a id="main-content"></a>
-			<?php if ( $page['content_before']): print render($page['content_before']); endif; ?>
 			<?php if ($tabs): ?><div class="tabs-container"><?php print render($tabs); ?></div><?php endif; ?>
 			<?php print render($page['help']); ?>
 			<?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
+			<?php if ( $page['content_before']): print render($page['content_before']); endif; ?>
 			<?php print render($page['content']); ?>
 			<?php if ( $page['content_after']): print render($page['content_after']); endif; ?>
-		</div> <!-- /#content -->
+		</main> <!-- /#content -->
 
 		<?php if ($page['sidebar_first']): ?>
+		<aside id="sidebar-first" class="column">
 			<?php print render($page['sidebar_first']); ?>
+		</aside>
 		<?php endif; ?>
 
 		<?php if ($page['sidebar_second']): ?>
+		<aside id="sidebar-second" class="column">
 			<?php print render($page['sidebar_second']); ?>
+		</aside>
 		<?php endif; ?>
 	</div>
 </div> <!-- /#main-wrapper -->
@@ -143,11 +148,11 @@
 <?php endif; ?>
 
 <?php if ( $page['footer_before'] || $page['footer'] || $page['footer_after'] ): ?>
-<div id="footer" class="section">
+<footer id="footer" class="section">
 	<div class="holder">
 		<?php if ( $page['footer_before']): print render($page['footer_before']); endif; ?>
 		<?php if ( $page['footer']): print render($page['footer']); endif; ?>
 		<?php if ( $page['footer_after']): print render($page['footer_after']); endif; ?>
 	</div>
-</div><!-- /#footer -->
+</footer><!-- /#footer -->
 <?php endif; ?>

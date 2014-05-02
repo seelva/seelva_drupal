@@ -19,22 +19,30 @@ function seelva_html_head_alter(&$head_elements) {
 function seelva_css_alter(&$css) {
   /* Exclude certain stylsheets from stylesheets array */
   // Exclude seelva stylesheets
-  $seelva_stylesheets = drupal_parse_info_file( drupal_get_path('theme', 'seelva') . '/seelva.info' );
-  $seelva_stylesheets = $seelva_stylesheets['stylesheets'];
-  $counter = 1;
-  $exclude = array();
 
-  foreach ($seelva_stylesheets as $item) {
-    // Styleshets are represented as per-media arrays: print, screen...
-    foreach ($item as $name) {
-      if ($name != '--') {
-        $saved_value = (bool)theme_get_setting( 'seelva_exclude_css_' . (string)$counter );
+  $current_theme = variable_get('theme_default','none');
+  $themes = list_themes();
+  $theme_object = $themes[$current_theme];
 
-        if( $saved_value ) {
-          $exclude[drupal_get_path('theme', 'seelva') . '/' . $name] = $saved_value;
+  $seelva_stylesheets = drupal_parse_info_file( $theme_object->filename );
+
+  if (!empty($seelva_stylesheets['stylesheets'])) {
+    $seelva_stylesheets = $seelva_stylesheets['stylesheets'];
+    $counter = 1;
+    $exclude = array();
+
+    foreach ($seelva_stylesheets as $item) {
+      // Styleshets are represented as per-media arrays: print, screen...
+      foreach ($item as $name) {
+        if ($name != '--') {
+          $saved_value = (bool)theme_get_setting( 'seelva_exclude_css_' . (string)$counter );
+
+          if( $saved_value ) {
+            $exclude[drupal_get_path('theme', $current_theme) . '/' . $name] = $saved_value;
+          }
+
+          $counter++;
         }
-
-        $counter++;
       }
     }
   }
@@ -60,13 +68,11 @@ function seelva_css_alter(&$css) {
 
   $counter = 1;
   foreach ($custom_stylsheets as $name) {
-    if ($name != ' ') {
-      $saved_value = (bool)theme_get_setting( 'custom_exclusion_info' );
+    $saved_value = (bool)theme_get_setting( 'custom_exclusion_info' );
 
-      $exclude[$name] = $saved_value;
+    $exclude[trim($name)] = $saved_value;
 
-      $counter++;
-    }
+    $counter++;
   }
 
   $css = array_diff_key($css, $exclude);
@@ -78,9 +84,9 @@ function seelva_css_alter(&$css) {
 **/
 function seelva_form_user_login_alter(&$form, &$form_state, $form_id) {
   $actions_suffix = '<div class="actions-suffix">';
-  $actions_suffix .= l(t('Request new password'), 'user/password', array('attributes' => array('class' => 'btn-login-password', 'title' => t('Get a new password'))));
+  $actions_suffix .= l(t('Request new password'), 'user/password', array('attributes' => array('class' => array('btn-login-password'), 'title' => t('Get a new password'))));
   if (user_register_access()):
-    $actions_suffix .= l(t('Create new account'), 'user/register', array('attributes' => array('class' => 'btn-login-register', 'title' => t('Create a new user account'))));
+    $actions_suffix .= l(t('Create new account'), 'user/register', array('attributes' => array('class' => array('btn-login-register'), 'title' => t('Create a new user account'))));
   endif;
   $actions_suffix .= '</div>';
   $form['actions']['#suffix'] = $actions_suffix;
@@ -88,6 +94,7 @@ function seelva_form_user_login_alter(&$form, &$form_state, $form_id) {
 
 function seelva_form_alter(&$form, &$form_state, $form_id){
   if ($form_id == 'search_form'){
+    // Add 'form-actions' class to form-submit in advanced search fieldset
       $form['advanced']['submit']['#prefix'] = '<div class="action form-actions">';
   }
 }

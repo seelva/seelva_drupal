@@ -56,15 +56,6 @@ function seelva_preprocess_html(&$vars) {
   $vars['html_attributes_array']['lang'][] = $vars['language']->language;
   $vars['html_attributes_array']['xml:lang'][] = $vars['language']->language;
 
-  if ( !theme_get_setting('html5') ) {
-    $vars['doctype'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">' . "\n";
-    $vars['html_attributes_array']['xmlns'][] = 'http://www.w3.org/1999/xhtml';
-    $vars['html_attributes_array']['version'][] = 'XHTML+RDFa 1.0';
-  }
-  else {
-    $vars['doctype'] = '<!DOCTYPE html>' . "\n";
-  }
-
   // Use html5shiv.
   if (theme_get_setting('html5shim')) {
     $script1 = array(  
@@ -98,6 +89,17 @@ function seelva_preprocess_html(&$vars) {
       'href' => drupal_get_path('theme', 'seelva') . '/humans.txt'
     );
     drupal_add_html_head_link($link);
+  }
+
+  // Include Google Fonts defined by user
+  if (theme_get_setting('enable_google_fonts')) {
+    $google_fonts = explode(PHP_EOL, theme_get_setting('google_fonts_list'));
+
+    foreach ($google_fonts as $url) {
+      if (filter_var($url, FILTER_VALIDATE_URL) !== false) {
+        drupal_add_css($url, array('type' => 'external', 'group' => 'CSS_THEME', 'weight' => -50));
+      }
+    }
   }
 }
 
@@ -178,6 +180,6 @@ function seelva_preprocess_block(&$vars) {
 * Implements THEME_preprocess_views_view()
 **/
 function seelva_preprocess_views_view(&$vars) {
-  /* Add a class in the form of view-VIEWNAME--VIEWDISPLAY-ID to every class */
+  /* Add a class in the form of view-VIEWNAME--VIEWDISPLAY-ID to each view */
   $vars['classes_array'][] = 'view-'. $vars['css_name'] . '--' . $vars['display_id'];
 } 

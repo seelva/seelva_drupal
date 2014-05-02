@@ -212,6 +212,10 @@ function seelva_breadcrumb($vars) {
     $output .= '<li class="breadcrumb-item';
     if ($i == 0) {
       $output .= ' first';
+
+      if ($show_breadcrumb_home) {
+        $output .= ' breadcrumb-item-home';
+      }
     }
     if ($i+1 == $array_size) {
       $output .= ' last';

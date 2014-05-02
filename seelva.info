@@ -1,7 +1,7 @@
 name = seelva
 description = Seelva base theme.
 package = Core
-version = VERSION
+version = 7.x-4.0
 core = 7.x
 
 ; /*====================================
@@ -73,7 +73,6 @@ regions[footer_after]  = Footer After
 ; =            $GENERAL SETTINGS            =
 ; =========================================*/
 
-settings[html5]  = 0
 settings[html5shim] = 1
 settings[humans] = 1
 

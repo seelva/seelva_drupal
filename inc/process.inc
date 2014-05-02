@@ -56,6 +56,7 @@ function seelva_process_block(&$vars) {
         if (current_path() == 'front') {
           $vars['content'] = '<h1 class="site-name">' . t('Welcome') . '</h1>';
         }
+        break;
     }
   }
 }
